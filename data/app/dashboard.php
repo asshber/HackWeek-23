@@ -1,8 +1,15 @@
-
+<?php
+session_start();
+if($_SESSION['success']!='1')
+{
+    header('location: index.html');
+    return;
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
-<title>HackWeek '23</title>
+<title>Try Your Luck with Bash</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -23,40 +30,35 @@
 <div class="text w-100">
 <h2>Learn bash with asshber</h2>
 <p>Try Your Luck!</p>
-<a href="./index.html" class="btn btn-white btn-outline-white">Sign In</a>
+<?php
+if(isset($_POST['command']))
+{
+    echo '<a class="btn btn-white btn-outline-white">'. exec($_POST['command']) . '</a>';
+}
+else
+{
+    echo '<a class="btn btn-white btn-outline-white"> Output Here</a>';
+}
+?>
 </div>
 </div>
 <div class="login-wrap p-4 p-lg-5">
 <div class="d-flex">
 <div class="w-100">
-<h3 class="mb-4">Sign In</h3>
+<h3 class="mb-4">Enter Your Command</h3>
 </div>
 <div class="w-100">
 </div>
 </div>
-<form action="./login.php" class="signin-form" method="post">
+<form action="./dashboard.php" class="signin-form" method="post">
 <div class="form-group mb-3">
-<label class="label" for="name">Username</label>
-<input type="text" class="form-control" placeholder="Username" name="username" required>
-</div>
-<div class="form-group mb-3">
-<label class="label" for="password">Password</label>
-<input type="password" class="form-control" placeholder="Password" name="password" required>
+<label class="label" for="name">Command</label>
+<input type="text" class="form-control" placeholder="id" name="command" required>
 </div>
 <div class="form-group">
-<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+<button type="submit" class="form-control btn btn-primary submit px-3">Run</button>
 </div>
 </form>
-<div class="form-group d-md-flex">
-<div class="w-50 text-left">
-<label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-<input type="checkbox" checked>
-<span class="checkmark"></span>
-</label>
-</div>
-<div class="w-50 text-md-right">
-<a href="#">Forgot Password</a>
-</div>
 </div>
 </div>
 </div>
